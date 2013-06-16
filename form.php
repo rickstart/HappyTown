@@ -3,6 +3,30 @@
     include_once("back.php");
 ?>
 <!DOCTYPE html>
+<script type="text/javascript">function showAddress(address) {
+      if (geocoder) {
+        geocoder.getLatLng(
+          address,
+          function(point) {
+            if (!point) {
+              alert(address + " not found");
+            } else {
+              map.setCenter(point, 15);
+              var marker = new GMarker(point, {draggable: true});
+              map.addOverlay(marker);
+              GEvent.addListener(marker, "dragend", function() {
+                marker.openInfoWindowHtml(marker.getLatLng().toUrlValue(6));
+              });
+              GEvent.addListener(marker, "click", function() {
+                marker.openInfoWindowHtml(marker.getLatLng().toUrlValue(6));
+              });
+          GEvent.trigger(marker, "click");
+            }
+          }
+        );
+      }
+    }
+    </script>
 
 <html>
 <head>
@@ -43,14 +67,11 @@
           
 
             ?> 
-            <label for="email">* Teléfono: </label><br>
+            <label for="email">Upload  </label><br>
             <input type="text" name="telefono" size="15%" maxlength="60"><br>
-            <label for="email">* Email: </label><br>
-            <input type="text" name="email" size="15%" maxlength="60"><br> 
-            <label for="mensaje">* Mensaje: </label><br>  
-            <textarea name="mensaje" cols="12%" rows="5"></textarea> <br><br>
+        
     
-            <input type="image" class="btn_send" name="enviar" src="images/contacto/btn_enviar.png" ></label>
+            <input type="submit" class="btn_send" name="!post" value="!post">
         </form>
 
    
