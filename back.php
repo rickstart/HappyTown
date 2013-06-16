@@ -83,10 +83,12 @@ class sQuery   // se declara una clase para poder ejecutar las consultas, esta c
 class post
 {
 	var $id;
+	var $description;
 	var $title;     
 	var $category_id;
-	var $image_id;
-	var $location_id;
+	var $image;
+	var $lat;
+	var $lng;
 
 
     public static function getPins() 
@@ -112,10 +114,12 @@ class post
 			$result=$obj_post->executeQuery("select * from post_tbl where post_id = $nro"); 
 			$row=mysql_fetch_array($result);
 			$this->id=$row['post_id'];
+			$this->title=$row['description'];
 			$this->title=$row['title'];
 			$this->category_id=$row['category_id'];
-			$this->image_id=$row['image_id'];
-			$this->location_id=$row['location_id'];
+			$this->image_id=$row['image'];
+			$this->lat=$row['lat'];
+			$this->lng=$row['lng'];
 			
 			
 		}
@@ -124,14 +128,18 @@ class post
 		// metodos que devuelven valores
 	function getId()
 	 { return $this->id;}
+	function getDescription()
+	 { return $this->description;}
 	function getTitle()
 	 { return $this->title;}
 	function getCategory()
 	 { return $this->category_id;}
 	function getImage()
-	 { return $this->image_id;}
-	function getLocation()
-	 { return $this->location_id;}
+	 { return $this->image;}
+	function getLat()
+	 { return $this->lat;}
+	function getLng()
+	 { return $this->lng;}
 
 	 
 		// metodos que setean los valores
@@ -139,21 +147,25 @@ class post
 
 	function setId($val)
 	 { return $this->id=$val;}
+	function setDescription($val)
+	 { return $this->description=$val;}
 	function setTitle($val)
 	 { return $this->title=$val;}
 	function setCategory($val)
 	 { return $this->category_id=$val;}
 	function setImage($val)
-	 { return $this->image_id=$val;}
-	function setLocation($val)
-	 { return $this->location_id=$val;}
+	 { return $this->image=$val;}
+	function setLat($val)
+	 { return $this->lat=$val;}
+	 function setLng($val)
+	 { return $this->lng=$val;}
 
  
 	
 	private function insertPost()	
 	{
 			$obj_post=new sQuery();
-			$query="insert into post_tbl( title, category_id, image_id, location_id)values('$this->title', '$this->category_id','$this->image_id','$this->location_id')";
+			$query="insert into post_tbl( description, title, category_id, image, lat, lng)values('$this->description',$this->title', '$this->category_id','$this->image','$this->lat','$this->lng')";
 			
 			$obj_post->executeQuery($query); 
 			return $obj_post->getAffect(); 

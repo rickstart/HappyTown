@@ -35,20 +35,7 @@
     
  
         var sevilla = new google.maps.LatLng(37.38264, -5.996295);
-        /*var opciones = {
-            zoom : 7,
-            center: sevilla,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        var div = document.getElementById('map_canvas');
-        var map = new google.maps.Map(div, opciones);
-        
-        // Creamos un marcador y lo posicionamos en el mapa
-        var marcador = new google.maps.Marker({
-          position: new google.maps.LatLng(34.404, 6.008),
-          map: map
-        });
-        */
+
        var map;
         var latitud;
         var longitud;
@@ -91,6 +78,8 @@
         }
          
         function cargarMapa() {
+            var image = 'anthropo.png';
+            
             var latlon = new google.maps.LatLng(latitud,longitud);
             var myOptions = {
                 zoom: 17,
@@ -104,6 +93,7 @@
             var marcador = new google.maps.Marker({
                 position: coorMarcador,
                 map: map,
+                icon: image,
                 title: "Dónde estoy?"
 
             });
