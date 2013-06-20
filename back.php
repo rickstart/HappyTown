@@ -5,11 +5,17 @@ class Conexion
 	function Conexion()
 	{
 		// se definen los datos del servidor de base de datos 
+		/*
+		$conection['server']="mysql10.000webhost.com";  //host
+		$conection['user']="a8417090_a841709";         //  usuario
+		$conection['pass']="Alemania1";             //password
+		$conection['base']="a8417090_happy";           //base de datos
+		*/
+
 		$conection['server']="localhost:8889";  //host
 		$conection['user']="root";         //  usuario
 		$conection['pass']="root";             //password
 		$conection['base']="happyTown";           //base de datos
-		
 		// crea la conexion pasandole el servidor , usuario y clave
 		$conect= mysql_connect($conection['server'],$conection['user'],$conection['pass']);
 
@@ -162,10 +168,10 @@ class post
 
  
 	
-	private function insertPost()	
+	public function insertPost($description,$title,$category_id,$image,$lat,$lng)	
 	{
 			$obj_post=new sQuery();
-			$query="insert into post_tbl( description, title, category_id, image, lat, lng)values('$this->description',$this->title', '$this->category_id','$this->image','$this->lat','$this->lng')";
+			$query="insert into post_tbl( description, title, category_id, image, lat, lng)values('".$description."','".$title."', '".$category_id."','".$image."','".$lat."','".$lng."')";
 			
 			$obj_post->executeQuery($query); 
 			return $obj_post->getAffect(); 

@@ -12,6 +12,8 @@
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=geometry"></script>
     <link rel='stylesheet' type='text/css' href='css/reset.css'>
+    <link rel='stylesheet' type='text/css' href='css/bootstrap.css'>
+    <link rel='stylesheet' type='text/css' href='css/reset.css'>
     <link rel='stylesheet' type='text/css' href='css/styles.css'>
     <meta charset="UTF-8">
 
@@ -46,7 +48,9 @@
               map.addOverlay(marker);
               lat=marker.getLatLng().lat();
               lng=marker.getLatLng().lng();
-              alert(marker.getLatLng().lat()+","+marker.getLatLng().lng());
+              document.getElementById('lat').value=lat;
+              document.getElementById('lng').value=lng;
+              //alert(marker.getLatLng().lat()+","+marker.getLatLng().lng());
               GEvent.addListener(marker, "dragend", function() {
               marker.openInfoWindowHtml(marker.getLatLng().toUrlValue(6));
               });
@@ -67,9 +71,18 @@
   
     <section class="form">
         
+        <form action="#" onsubmit="showAddress(this.address.value); return false">
+   
+          <p>
+            <label for="Locate">Location: </label>  <br>
+            <input type="text" style="width:350px" name="address" value="" />
+            <input type="submit" class="btn btn-info" value="Search" />
+          </p> 
+          <div id="map_canvas" style="width: 600px; height: 400px; display:block;"></div>
+         
+        </form>
 
-
-        <form action="post.php" method="post" enctype="multipart/form-data"> 
+        <form action="post.php" method="post"  enctype="multipart/form-data"> 
             <label for="title">Description: </label>  <br>
             <input type="text" name="description"  maxlength="140"><br>
             <label for="title">Title: </label>  <br>
@@ -148,34 +161,26 @@
           
 
             ?> 
-            <br>
-             <p>
-            <input type="text" style="width:350px" name="address" value="243 parnassus,san francisco,ca" />
-           
-            </p>
-            <div id="map_canvas" style="width: 600px; height: 400px; display:none;"></div>
-            <input type="submit" class="btn_send" name="!post" onsubmit="showAddress(this.address.value);"  value="!post">
+          <br>
+          <br>
+            <input type="submit" class="btn btn-success" name="!post"   value="!post">
+            <input type="hidden" id="lat" name="lat" > 
+            <input type="hidden" id="lng" name="lng" > 
         </form>
+        <br>
+        <br>
         
         <form method="post" enctype="multipart/form-data">
          <label for="file">Filename:</label>
          <input type="file" name="file" id="file" />
          <br />
-         <input type="submit" name="submit"  value="Submit" />
+         <input type="submit" class="btn btn-info" name="submit"  value="Submit" />
          </form>
 
 
-        <!--
-         <form action="#" onsubmit="showAddress(this.address.value); return false">
-   
-          <p>
-            <input type="text" style="width:350px" name="address" value="243 parnassus,san francisco,ca" />
-            <input type="submit" value="Go!" />
-          </p>
-          <div id="map_canvas" style="width: 600px; height: 400px; display:none;"></div>
-         
-        </form>
-        -->
+        
+    
+        
        
 
     </section>
